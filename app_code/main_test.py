@@ -138,7 +138,7 @@ def main():
         # Create plot for post video analysis
         # Plot will be saved in the same location as the npz file
         from main_create_plot import create_plot
-        create_plot(dict_out, file_output + '.png', argd.dist_normalization)
+        create_plot(dict_out, file_output + '.png', opt['dist_normalization'])
 
     if argd.create_videoout:
         # Generate video

@@ -34,11 +34,11 @@ About other parameters:
 - '--create_videoout' can be 0 or 1. If it is equal to 1, a video file with local scores is generated and saved in the same location of the numpy file.
 - '--dist_normalization' can be 0 or 1. If it is equal to 1, the output distances are normalized using on the values obtained on pristine videos.
 
-To run IDreavel [2], execute in a terminal the following command:
+To run ID-Reveal [2], execute in a terminal the following command:
 ```bash
 export PYTHONPATH="${PYTHONPATH}:./pythonlib/"
 python main_test.py --file_video_input "${INPUT_VIDEO}" --file_npz_output "${OUPUT_NPZ}" \
-                    --dir_poi "./poi/nicolas-cage/app_idreavel" --gpu 0 \
+                    --dir_poi "./poi/nicolas-cage/app_idreveal" --gpu 0 \
                     --create_plot 1 --create_output_video 1
 ```
 
@@ -53,8 +53,8 @@ where POI_DIR is the output directory. This function does the following: for eac
 For each reference video with filename "{videoname}.mp4", the script generates in the output directory:
 1.	a video with the tracking indices with filename "track/track_{videoname}.mp4".
 2.	an extracted face for each track with filename "faces/{videoname}/track_{n}.png", where n is the index of track.
-3.	numpy files with the poiforensics features. In detail, a file is created for each detected track with filename "app_poiforensics/{videoname}/embs_track{n}.npz", where n is the index of track.
-4.  numpy files with the id-reveal features. In detail, a file is created for each detected track with filename "app_idreveal/<videoname>/embs_track{n}.npz", where n is the index of track.
+3.	numpy files with the POI-Forensics features. In detail, a file is created for each detected track with filename "app_poiforensics/{videoname}/embs_track{n}.npz", where n is the index of track.
+4.  numpy files with the ID-Reveal features. In detail, a file is created for each detected track with filename "app_idreveal/{videoname}/embs_track{n}.npz", where n is the index of track.
 
 Before executing the test, the generated directory should be cleaned deleting the files relative to tracks that are not of the POI.
 
