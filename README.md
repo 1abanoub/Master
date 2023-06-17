@@ -11,5 +11,5 @@ Face manipulation technology is advancing very rapidly, and new methods are bein
 
 ## Code
 
-- [Demo code](https://github.com/grip-unina/poi-forensics/app_code/)
+- [Demo code](https://github.com/grip-unina/poi-forensics/tree/main/app_code)
 - The training code is coming soon

@@ -22,7 +22,7 @@ affiliations:
     index: 2
 ---
 
-[![POIforensics](https://img.shields.io/badge/Demo%20%28Coming%20soon%29-222222.svg?style=for-the-badge&logo=github)](https://github.com/grip-unina/poi-forensics/app_code/)
+[![POIforensics](https://img.shields.io/badge/Demo-222222.svg?style=for-the-badge&logo=github)](https://github.com/grip-unina/poi-forensics/tree/main/app_code)
 [![arXiv](https://img.shields.io/badge/-arXiv-B31B1B.svg?style=for-the-badge)](https://arxiv.org/abs/2204.03083)
 [![GRIP](https://img.shields.io/badge/-GRIP-0888ef.svg?style=for-the-badge)](https://www.grip.unina.it)
 
