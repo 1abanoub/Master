@@ -90,7 +90,7 @@ def compute_spec(fileinput,
                  n_fft=512, window_step=10, window_length=25):
     sampling_rate, signal = read_audio_generic(fileinput, monochannel=True)
 
-    signal = librosa.resample(signal, sampling_rate, target_sampling_rate)
+    signal = librosa.resample(signal, orig_sr=sampling_rate, target_sr=target_sampling_rate)
     signal = normalize_volume(signal, audio_norm_target_dBFS, increase_only=True)
     spec = wav_to_spectrogram(signal, target_sampling_rate,
                               n_fft=n_fft, window_step=window_step, window_length=window_length)

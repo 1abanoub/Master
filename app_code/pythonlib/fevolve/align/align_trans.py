@@ -178,7 +178,7 @@ def get_affine_transform_matrix(src_pts, dst_pts):
 #    #print(('src_pts_:\n' + str(src_pts_))
 #    #print(('dst_pts_:\n' + str(dst_pts_))
 
-    A, res, rank, s = np.linalg.lstsq(src_pts_, dst_pts_)
+    A, res, rank, s = np.linalg.lstsq(src_pts_, dst_pts_, rcond=-1)
 
 #    #print(('np.linalg.lstsq return A: \n' + str(A))
 #    #print(('np.linalg.lstsq return res: \n' + str(res))

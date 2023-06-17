@@ -70,23 +70,36 @@ def extract_boxes(filevideo, device, opt, verbose=True):
     return dict_out, info_tracks
 
 
-def generate_clips_tracks(filevideo, fileboxes, outputfolder, device, fps, verbose=True):
+def generate_clips_tracks(filevideo, fileboxes, outputfolder, device, fps,
+                          write_one=False, compute_landmarks=False, list_good_track=None, verbose=True):
     from grip_unina.util_read import ReadingResampledVideo
     from grip_unina.util_read import MockFileBoxes
     from grip_unina.util_detect import FaceExtractor
     from grip_unina.util_write import WritingClips
     from grip_unina.util_face import ComputeLandMarkers
+    from grip_unina.util_dist import PassIdentity
+    from grip_unina.util_read import FilterValues
 
     op2 = MockFileBoxes(fileboxes, list_data=['boxes', 'image_inds', 'id_track', 'points', ])
-    op3 = FaceExtractor(face_size=None, square=True, return_frame=False, factor_border=2)
-    op4 = ComputeLandMarkers(device)
+    if list_good_track is None:
+        op3 = PassIdentity()
+    else:
+        op3 = FilterValues(condition=lambda x: x in list_good_track,
+                       list_data=['boxes', 'image_inds', 'id_track', 'points',],
+                       list_pass=['frames_bgr', 'frames_inds'],
+                       key_values='id_track')
+    op4 = FaceExtractor(face_size=None, square=True, return_frame=False, factor_border=2)
+    if compute_landmarks:
+        op5 = ComputeLandMarkers(device)
+    else:
+        op5 = PassIdentity()
 
     with ReadingResampledVideo(filevideo, fps, 1) as video:
-        with WritingClips(outputfolder) as write_video:
+        with WritingClips(outputfolder, write_one=write_one) as write_video:
             if verbose:
                 print(f'Reading video {filevideo} of {video.get_number_frames()} frames with {video.get_fps()} fps.')
 
-            ops = [video, op2.reset(), op3.reset(), op4.reset(), write_video]
+            ops = [video, op2.reset(), op3.reset(), op4.reset(), op5.reset(), write_video]
             list_times = [0 for _ in range(len(ops))]
             if verbose:
                 print('', flush=True)

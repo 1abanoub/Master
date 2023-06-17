@@ -267,8 +267,9 @@ class FilterTrack:
 
 class FilterValues:
 
-    def __init__(self, condition, list_data=['boxes', 'image_inds', ], key_values='image_inds'):
+    def __init__(self, condition, list_data=['boxes', 'image_inds', ], key_values='image_inds', list_pass=list()):
         self.list_data = list_data
+        self.list_pass = list_pass
         self.condition = condition
         self.key_values = key_values
 
@@ -277,10 +278,14 @@ class FilterValues:
 
     def __call__(self, inp):
         out = {key: list() for key in self.list_data}
+        for key in self.list_pass:
+            out[key] = inp[key]
 
         for index, ids in enumerate(inp[self.key_values]):
             if self.condition(ids):
                 for key in self.list_data:
                     out[key].append(inp[key][index])
+
+
 
         return out

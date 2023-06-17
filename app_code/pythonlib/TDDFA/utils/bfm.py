@@ -16,7 +16,7 @@ class BFMModel(object):
         self.w_shp = bfm.get('w_shp').astype(np.float32)
         self.w_exp = bfm.get('w_exp').astype(np.float32)
         self.tri = bfm.get('tri')
-        self.keypoints = bfm.get('keypoints').astype(np.long)  # fix bug
+        self.keypoints = bfm.get('keypoints').astype(np.int64)  # fix bug
         w = np.concatenate((self.w_shp, self.w_exp), axis=1)
         self.w_norm = np.linalg.norm(w, axis=0)
 

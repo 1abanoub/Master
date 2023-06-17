@@ -194,7 +194,7 @@ class OutputBoxes:
     def __init__(self, outputfile, margin=25, return_frame=False, color=(180, 180, 180)):
         dat = np.load(outputfile)
         self.boxes = dat['embs_boxes']
-        self.ranges = np.asarray([[_[0] + margin, _[1] - margin] for _ in dat['embs_range'].astype(np.int)])
+        self.ranges = np.asarray([[_[0] + margin, _[1] - margin] for _ in dat['embs_range'].astype(np.int64)])
         if 'embs_points' in dat:
             self.points = np.asarray([_[margin: len(_)-margin] for _ in dat['embs_points']])
         else:
@@ -252,8 +252,9 @@ class OutputBoxes:
 
 
 class WritingClips:
-    def __init__(self, filedir):
+    def __init__(self, filedir, write_one=False):
         self.list_track = dict()
+        self.write_one = write_one
         self.filedir = filedir
         os.makedirs(self.filedir, exist_ok=True)
 
@@ -268,7 +269,7 @@ class WritingClips:
         assert 'points' in inp
         assert 'face_bgr' in inp
         assert 'face_start' in inp
-        assert 'landmarks68' in inp
+        flag_landmarks = 'landmarks68' in inp
 
         for index_f in np.argsort(inp['image_inds']):
             index = inp['image_inds'][index_f]
@@ -276,7 +277,10 @@ class WritingClips:
             start = inp['face_start'][index_f]
             point = [[inp['points'][index_f][2 * j] - start[0],
                       inp['points'][index_f][2 * j + 1] - start[1]] for j in range(5)]
-            lm68 = np.asarray(inp['landmarks68'][index_f]) - [start, ]
+            if flag_landmarks:
+                lm68 = np.asarray(inp['landmarks68'][index_f]) - [start, ]
+            else:
+                lm68 = None
             box = inp['boxes'][index_f]
             box = [box[0]-start[0], box[1]-start[1],
                    box[2]-start[0], box[3]-start[1]]
@@ -285,13 +289,18 @@ class WritingClips:
                 self.list_track[track] = index
 
             count = index - self.list_track[track]
+            if self.write_one:
+                if count == 0:
+                    filepng = os.path.join(self.filedir, 'track_%d.png' % track)
+                    cv2.imwrite(filepng, inp['face_bgr'][index_f])
+                continue
 
             filepng = os.path.join(self.filedir, 'crop_%d_%d.png' % (track, count))
             filenpz = os.path.join(self.filedir, 'crop_%d_%d.png.npz' % (track, count))
 
             cv2.imwrite(filepng, inp['face_bgr'][index_f])
 
-            data_storage = {"ldm": (box, point, lm68),
+            data_storage = {"ldm": (box, point, lm68) if lm68 else (box, point),
                             "idx": index,
                             "box": start}
             np.savez(filenpz, **data_storage)
