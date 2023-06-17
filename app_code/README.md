@@ -58,6 +58,17 @@ For each reference video with filename "{videoname}.mp4", the script generates i
 
 Before executing the test, the generated directory should be cleaned deleting the files relative to tracks that are not of the POI.
 
+### License
+Copyright (c) 2023 Image Processing Research Group of University Federico II of Naples ('GRIP-UNINA').
+
+All rights reserved.
+
+This software should be used, reproduced and modified only for informational and nonprofit purposes.
+
+By downloading and/or using any of these files, you implicitly agree to all the
+terms of the license, as specified in the document LICENSE.txt
+(included in this package) 
+
 ### References
 - [1] D. Cozzolino, A. Pianese, M. Nießner, L. Verdoliva “Audio-Visual Person-of-Interest Deepfake Detection” CVPR workshop 2023
 - [2] D. Cozzolino, A. Rössler, J. Thies, M. Nießner, L. Verdoliva “ID-Reveal: Identity-aware Deepfake video Detection” ICCV 2021
