@@ -46,8 +46,8 @@ python main_test.py --file_video_input "${INPUT_VIDEO}" --file_npz_output "${OUP
 ### Adding other POIs
 Starting from a set of POI reference videos included in the folder INPUT_DIR, execute in a terminal:
 ```bash
-export PYTHONPATH="${PYTHONPATH}:./lib/"
-python main_gen_reference.py --dir_videos "${INPUT_DIR}" --dir_poi "${POI_DIR}" --gpu 0
+export PYTHONPATH="${PYTHONPATH}:./pythonlib/"
+python main_gen_references.py --dir_videos "${INPUT_DIR}" --dir_poi "${POI_DIR}" --gpu 0
 ```
 where POI_DIR is the output directory. This function does the following: for each video it performs face detection (using RetinaFace) and face tracking and then for each track it computes the features.
 For each reference video with filename "{videoname}.mp4", the script generates in the output directory:
