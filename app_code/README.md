@@ -21,9 +21,9 @@ In the pois folder, there are already the extracted features for Nicolas Cage.
 To run POI-Forensics [1], execute in a terminal the following command:
 ```bash
 export PYTHONPATH="${PYTHONPATH}:./pythonlib/"
-python main_test.py --file_video_input "${INPUT_VIDEO}" --file_npz_output "${OUPUT_NPZ}" \
+python main_test.py --file_video_input "${INPUT_VIDEO}" --file_output "${OUPUT_NPZ}" \
                     --dir_poi "./poi/nicolas-cage/app_poiforensics" --gpu 0 \
-                    --create_plot 1 --create_output_video 1
+                    --create_plot 1 --create_videoout 1
 ```
 
 where INPUT_VIDEO is the video to analyze, OUPUT_NPZ is the numpy file with results.
@@ -37,9 +37,9 @@ About other parameters:
 To run ID-Reveal [2], execute in a terminal the following command:
 ```bash
 export PYTHONPATH="${PYTHONPATH}:./pythonlib/"
-python main_test.py --file_video_input "${INPUT_VIDEO}" --file_npz_output "${OUPUT_NPZ}" \
+python main_test.py --file_video_input "${INPUT_VIDEO}" --file_output "${OUPUT_NPZ}" \
                     --dir_poi "./poi/nicolas-cage/app_idreveal" --gpu 0 \
-                    --create_plot 1 --create_output_video 1
+                    --create_plot 1 --create_videoout 1
 ```
 
 
