@@ -22,7 +22,7 @@ To run POI-Forensics [1], execute in a terminal the following command:
 ```bash
 export PYTHONPATH="${PYTHONPATH}:./pythonlib/"
 python main_test.py --file_video_input "${INPUT_VIDEO}" --file_output "${OUPUT_NPZ}" \
-                    --dir_poi "./poi/nicolas-cage/app_poiforensics" --gpu 0 \
+                    --dir_poi "./pois/nicolas-cage/app_poiforensics" --gpu 0 \
                     --create_plot 1 --create_videoout 1
 ```
 
